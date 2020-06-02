@@ -2,6 +2,7 @@ package com.example.demo.security;
 
 import static com.example.demo.security.SecurityConstants.SIGN_UP_URL;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.http.HttpMethod;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     private static final String[] AUTH_WHITELIST = {
             "/swagger-resources/**",
@@ -34,10 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .requestMatchers(EndpointRequest.to("beans","health","metrics","info")).permitAll()
+                .antMatchers("/customer/**").access("hasAuthority('USER')")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()));
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(),userDetailsService));
     }
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

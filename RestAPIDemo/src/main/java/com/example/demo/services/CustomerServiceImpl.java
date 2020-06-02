@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.CustOrderInfo;
 import com.example.demo.model.Customer;
 import com.example.demo.repositories.AddressRepository;
 import com.example.demo.repositories.CustomerRepository;
@@ -35,6 +36,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<CustOrderInfo> getAllCustWithOrders() {
+        return customerRepository.findCustWithOrders();
+    }
+
+    @Override
     public Customer updateCustomer(Customer customer) {
         for(Address address:customer.getAddresses()) {
             address.setCustomerId(customer.getCustomerId());
@@ -49,4 +55,9 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.delete(customer);
         return customer.getCustomerId();
     }
+    @Override
+    public int getCustCountWithFirstName(String name){
+        return customerRepository.getTotalCustCount(name);
+    }
+
 }
