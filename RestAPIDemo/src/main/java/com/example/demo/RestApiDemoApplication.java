@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @SpringBootApplication (scanBasePackages={"com.example.demo"})
-@EnableEurekaClient
+
 public class RestApiDemoApplication {
 
 	@Bean
