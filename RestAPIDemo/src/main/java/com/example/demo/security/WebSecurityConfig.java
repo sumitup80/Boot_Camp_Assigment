@@ -20,10 +20,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private static final String[] AUTH_WHITELIST = {
-            "/swagger-resources/**",
-            "/swagger-ui.html",
             "/v2/api-docs",
-            "/webjars/**"
+            "/configuration/ui",
+            "/swagger-resources",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/swagger-resources/configuration/ui",
+            "/swagger-ui.html"
     };
 
     public WebSecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -36,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers("/customer/").permitAll()
                 .antMatchers(HttpMethod.GET, "/hostname").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .requestMatchers(EndpointRequest.to("beans","health","metrics","info")).permitAll()
                 //.antMatchers("/customer/**").access("hasAuthority('USER')")
                 .anyRequest().authenticated()
