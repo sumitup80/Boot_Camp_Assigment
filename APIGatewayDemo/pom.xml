@@ -12,7 +12,7 @@
 	<artifactId>APIGatewayDemo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>APIGatewayDemo</name>
-	<description>Demo project for APIGateway</description>
+	<description>Demo project for APIGateway application</description>
 
 	<properties>
 		<java.version>1.8</java.version>
