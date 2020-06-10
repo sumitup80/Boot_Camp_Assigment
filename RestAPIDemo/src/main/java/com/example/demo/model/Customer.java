@@ -38,7 +38,7 @@ public class Customer implements Serializable{
 	@Column(name = "email_id")
 	private String emailId;
 	
-	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY,
+	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER,
 			 cascade = {CascadeType.ALL})   
 	private List<Address> addresses;
 	public Integer getCustomerId() {

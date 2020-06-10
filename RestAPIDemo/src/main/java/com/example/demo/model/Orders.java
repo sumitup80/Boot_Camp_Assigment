@@ -37,7 +37,7 @@ public class Orders  implements Serializable{
 	@Column(name = "status")
 	private String status;
 	
-	@OneToMany(fetch = FetchType.LAZY,
+	@OneToMany(fetch = FetchType.EAGER,
 			 cascade = {CascadeType.ALL})
 	@JoinColumn(name = "order_id", nullable = false)
 	private List<OrderDetail> orderDetail;
