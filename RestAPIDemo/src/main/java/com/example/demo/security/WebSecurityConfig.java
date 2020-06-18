@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+        /*http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers("/customer/").permitAll()
                 .antMatchers(HttpMethod.GET, "/hostname").permitAll()
@@ -46,7 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager(),userDetailsService));
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(),userDetailsService));*/
+
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/**").permitAll();
     }
 
     @Override
